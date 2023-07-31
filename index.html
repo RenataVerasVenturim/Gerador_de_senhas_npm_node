@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas</title>
+</head>
+<body>
+    <h1>GERADOR DE SENHAS</h1>
+    <button id="gerar-senha">GERAR SENHA</button>
+    <p>Nova senha:</p>
+    <span id="nova-senha"></span>
+
+    <script>
+      // Capturar o botão e o parágrafo para exibir a senha
+      const botao = document.getElementById('gerar-senha');
+      const nova_senha_gerada = document.getElementById('nova-senha');
+
+      // Adicionar um evento de clique ao botão
+      botao.addEventListener('click', () => {
+        // Fazer uma solicitação GET para o servidor para obter a senha gerada
+        fetch('/gerar-senha')
+          .then(response => response.text())
+          .then(senha => {
+            // Exibir a senha no parágrafo
+            nova_senha_gerada.textContent = `${senha}`;
+          })
+          .catch(error => console.error('Erro ao obter a senha:', error));
+      });
+    </script>
+</body>
+</html>
